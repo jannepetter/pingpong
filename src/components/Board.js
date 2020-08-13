@@ -18,7 +18,7 @@ const Board = (props) => {
     const setUpdate = props.setUpdate
     const setStart = props.setStart
     const setRun = props.setRun
-    const gamePointLimit = 10
+    const gamePointLimit = 5
 
     const ctx = canvas.getContext('2d')
     canvas.width = playingfield.width

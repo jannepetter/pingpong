@@ -9,6 +9,7 @@ function App() {
   const [difficulty, setDifficulty] = useState('easy')
   const [update, setUpdate] = useState(false)
 
+
   return (
     <div className="App">
       <OptionPanel setDifficulty={setDifficulty} start={start}></OptionPanel>
