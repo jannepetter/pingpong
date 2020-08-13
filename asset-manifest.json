@@ -1,22 +1,22 @@
 {
   "files": {
-    "main.css": "/jannepetter/pingpong.git/static/css/main.ffb91199.chunk.css",
-    "main.js": "/jannepetter/pingpong.git/static/js/main.07e5af43.chunk.js",
-    "main.js.map": "/jannepetter/pingpong.git/static/js/main.07e5af43.chunk.js.map",
-    "runtime-main.js": "/jannepetter/pingpong.git/static/js/runtime-main.fee6291f.js",
-    "runtime-main.js.map": "/jannepetter/pingpong.git/static/js/runtime-main.fee6291f.js.map",
-    "static/js/2.96b9b089.chunk.js": "/jannepetter/pingpong.git/static/js/2.96b9b089.chunk.js",
-    "static/js/2.96b9b089.chunk.js.map": "/jannepetter/pingpong.git/static/js/2.96b9b089.chunk.js.map",
-    "index.html": "/jannepetter/pingpong.git/index.html",
-    "precache-manifest.9e09b0871380e87417edc16af404e396.js": "/jannepetter/pingpong.git/precache-manifest.9e09b0871380e87417edc16af404e396.js",
-    "service-worker.js": "/jannepetter/pingpong.git/service-worker.js",
-    "static/css/main.ffb91199.chunk.css.map": "/jannepetter/pingpong.git/static/css/main.ffb91199.chunk.css.map",
-    "static/js/2.96b9b089.chunk.js.LICENSE.txt": "/jannepetter/pingpong.git/static/js/2.96b9b089.chunk.js.LICENSE.txt"
+    "main.css": "//pingpong/static/css/main.ffb91199.chunk.css",
+    "main.js": "//pingpong/static/js/main.1298fa01.chunk.js",
+    "main.js.map": "//pingpong/static/js/main.1298fa01.chunk.js.map",
+    "runtime-main.js": "//pingpong/static/js/runtime-main.1e1e59ed.js",
+    "runtime-main.js.map": "//pingpong/static/js/runtime-main.1e1e59ed.js.map",
+    "static/js/2.96b9b089.chunk.js": "//pingpong/static/js/2.96b9b089.chunk.js",
+    "static/js/2.96b9b089.chunk.js.map": "//pingpong/static/js/2.96b9b089.chunk.js.map",
+    "index.html": "//pingpong/index.html",
+    "precache-manifest.81fbf28d409b3113257db169ce2f6ce5.js": "//pingpong/precache-manifest.81fbf28d409b3113257db169ce2f6ce5.js",
+    "service-worker.js": "//pingpong/service-worker.js",
+    "static/css/main.ffb91199.chunk.css.map": "//pingpong/static/css/main.ffb91199.chunk.css.map",
+    "static/js/2.96b9b089.chunk.js.LICENSE.txt": "//pingpong/static/js/2.96b9b089.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
-    "static/js/runtime-main.fee6291f.js",
+    "static/js/runtime-main.1e1e59ed.js",
     "static/js/2.96b9b089.chunk.js",
     "static/css/main.ffb91199.chunk.css",
-    "static/js/main.07e5af43.chunk.js"
+    "static/js/main.1298fa01.chunk.js"
   ]
 }
