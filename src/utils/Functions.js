@@ -50,16 +50,6 @@ export const drawball = (ctx) => {
 }
 export const ballHitsEdges = (canvas) => {
     const ballDy = Math.abs(ball.dy)
-    /*  if (ball.x >= canvas.width || ball.x <= ball.size) {
-         ball.dx *= -1
-     } */
-    /*  if (ball.x >= canvas.width + 100) {
-         startingPositions()
-     }
-     if (ball.x < -100) {
-         startingPositions()
-     } */
-
     if (ball.y > canvas.height - ballDy) {
         ball.y = canvas.height
         ball.dy *= -1
@@ -94,7 +84,6 @@ export const ballHitsPaddle = () => {
     const centerBounce = Math.round(Math.random() * (computerPaddle.height / 20))
     const speedIncrease = 1.02
     const maxSpeed = 30
-    console.log('speedball', ball.dx, ball.dy, 'paddlespeed', computerPaddle.speed, computerPaddle.height)
 
     const accBounce = (paddle, ball) => {
         const info = ball.dx > 0 ? 'right' : 'left'

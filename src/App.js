@@ -3,9 +3,6 @@ import './css/App.css';
 import Board from './components/Board';
 import OptionPanel from './components/OptionPanel';
 
-
-//värimaailma kuntoon. Ohjeisiin vielä mihin asti pelataan. Gh-pages ja linkki portfoliosta sinne
-
 function App() {
   const [run, setRun] = useState(false)
   const [start, setStart] = useState(false)
