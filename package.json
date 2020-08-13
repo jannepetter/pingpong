@@ -1,6 +1,6 @@
 {
   "name": "pingpong",
-  "homepage": "https://github.com/jannepetter/pingpong.git/",
+  "homepage": "https://github.com/jannepetter/jee.git/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -12,6 +12,7 @@
     "react-scripts": "^3.4.3"
   },
   "scripts": {
+    "clean": "gh-pages-clean",
     "deploy": "npm run build && gh-pages -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
