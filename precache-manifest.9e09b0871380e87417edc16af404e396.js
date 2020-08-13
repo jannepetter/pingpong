@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "28cacc832612a180b45ab35fb928f95d",
+    "revision": "53820e0526e771896ba18eaa4b192332",
     "url": "/jannepetter/pingpong.git/index.html"
   },
   {
