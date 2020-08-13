@@ -1,0 +1,55 @@
+.infobar{
+    background: var(--color1);
+    width: 100%;
+    min-height: 6vh;
+    color: white;
+    display: inline-block;
+}
+
+.infoitem{
+    margin-left: 20px;
+}
+.basicButton{
+    outline: none;
+}
+.touchnappi{
+    width: 12%;
+    height: 18%;
+    border-radius: 50%;
+    position: absolute; 
+    display: none;
+    outline: none;
+    opacity: 0.3;
+    background:white;
+
+
+}
+.ylos{
+    top: 35%;
+    left: 3%;  
+}
+.alas{
+    top: 55%;
+    left: 3%;   
+}
+
+@media  (max-height: 768px) and (max-width: 1024px) and (orientation: landscape) {
+    /* mobileview, touchbuttons show up to ipad size */
+.touchnappi{
+    display: inline;
+}
+}
+@media  (width: 1366px) and (height: 1024px) and (orientation: landscape) {
+    /* ipad pro speacial case */
+    .touchnappi{
+        display: inline;
+    }
+    }
+@media  (max-height: 420px) and (orientation: landscape) {
+    .ylos{
+    left: 6%;
+    }
+    .alas{
+    left: 6%;
+    }
+    }

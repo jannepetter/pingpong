@@ -5,6 +5,11 @@ let calcspotAI
 let player1calculatedAI = false
 let calcspotPlayer1AI
 
+export const resetAiCalculations = () => {
+    calculatedAI = false
+    player1calculatedAI = false
+}
+
 const centerPaddle = (paddle, speed) => {
     if (Math.abs(paddle.y + (paddle.height / 2) - playingfield.height / 2) < 6) {
         paddle.dy = 0
@@ -14,25 +19,40 @@ const centerPaddle = (paddle, speed) => {
         paddle.dy = speed
     }
 }
-const smoothspeed = (ballYspeed, ballXspeed, paddlespeed) => {
-    if (Math.abs(ballXspeed) > 4 || ballYspeed === 0) {
-        return paddlespeed
+
+const smoothspeed = (ball, paddle) => {
+    const height = Math.abs(ball.y - (paddle.y + paddle.height / 2))
+    const usespeed = Math.min(Math.abs(ball.dy) + 1, paddle.speed)
+    const ballXspeed = Math.abs(ball.dx)
+    const ballYspeed = Math.abs(ball.dy)
+    if (ballXspeed > 8 || ballYspeed > 8) {
+        return paddle.speed
     }
-    const usespeed = Math.min(Math.abs(ballYspeed), paddlespeed)
-    return usespeed
+    if (height < paddle.height / 2) {
+        return usespeed
+    }
+    return paddle.speed
 }
-export const AILvl1 = () => {
-    const speed = smoothspeed(ball.dy, ball.dx, computerPaddle.speed)
+export const AILvl1 = (weak) => {
+    let handicap = 0
+    if (weak) {
+        handicap = computerPaddle.speed / 3
+    }
+    const speed = smoothspeed(ball, computerPaddle) - handicap
     const balldirectionX = ball.dx > 0 ? 'incoming' : 'outgoing'
     const ballPaddleRelation = ball.y > (computerPaddle.y + computerPaddle.height / 2) ? 'down' : 'up'
-    const info = balldirectionX + ballPaddleRelation
-
+    const closeEnuf = ball.y > (computerPaddle.y + computerPaddle.height / 2) - computerPaddle.speed &&
+        ball.y < (computerPaddle.y + computerPaddle.height / 2) + computerPaddle.speed
+    const info = closeEnuf ? balldirectionX + 'towards' : balldirectionX + ballPaddleRelation
     switch (info) {
         case 'incomingdown':
             computerPaddle.dy = speed
             break;
         case 'incomingup':
             computerPaddle.dy = speed * -1
+            break;
+        case 'incomingtowards':
+            computerPaddle.dy = 0
             break;
         default:
             centerPaddle(computerPaddle, speed)
@@ -43,10 +63,10 @@ export const AILvl1 = () => {
 
 const reflectLeftoverFromWall = (start, leftover, goingUp) => {
     if (goingUp) {
-        return Math.abs(start - (leftover - ball.size))
+        return Math.abs(start - (leftover))
     }
     if (!goingUp) {
-        const dist = start + (leftover - ball.size)
+        const dist = start + (leftover)
         if (dist > playingfield.height) {
             return playingfield.height - (dist - playingfield.height)
         }
@@ -54,50 +74,41 @@ const reflectLeftoverFromWall = (start, leftover, goingUp) => {
     }
 }
 const getXlength = (startx) => {
-    const speedFactor = Math.abs(ball.dy) > 24 ? 33 : 0
-    const totW = playingfield.width + speedFactor
+    const totW = playingfield.width
     if (startx > totW / 2) {
-        return totW - (totW - startx) - (playerPaddle.x + playerPaddle.width) + ball.size - speedFactor
+        return totW - (totW - startx) - (playerPaddle.x + playerPaddle.width)
     } else {
-        return totW - startx - (totW - computerPaddle.x - ball.size) - speedFactor
+        return totW - startx - (totW - computerPaddle.x)
     }
 }
 
 const landingSpotY = (startx, starty, speedx, speedy) => {
     const xlength = getXlength(startx)
-    /* const xlength = playingfield.width - startx - (playingfield.width - computerPaddle.x - ball.size) */ //kerta riittää
-    console.log(xlength, 'äksä')
-    const ballSizeSpeed = ball.dy > 25 ? ball.size * 3 : ball.size * 2
     const time = xlength / speedx
     const ylength = Math.abs(time * speedy)
-    console.log(ylength, 'yy')
-    const leftover = ylength % (playingfield.height - ballSizeSpeed)
-    const numberOfHeightCrossings = Math.floor(ylength / (playingfield.height - ballSizeSpeed))
+    const numberOfHeightCrossings = Math.floor(ylength / (playingfield.height))
+    const leftover = (ylength % (playingfield.height))
     if (ylength === 0) {
         return ball.y
     }
     if (numberOfHeightCrossings % 2 === 0 && speedy < 0) {
-        console.log('yks')
-        return reflectLeftoverFromWall(starty, leftover - numberOfHeightCrossings * ballSizeSpeed, true)
+        return reflectLeftoverFromWall(starty, leftover, true)
     }
     if (numberOfHeightCrossings % 2 === 0 && speedy > 0) {
-        console.log('kaks')
-        return reflectLeftoverFromWall(starty, leftover - numberOfHeightCrossings * ballSizeSpeed, false)
+        return reflectLeftoverFromWall(starty, leftover, false)
     }
     if (numberOfHeightCrossings % 2 === 1 && speedy < 0) {
-        console.log('koli')
         const reverseStartY = playingfield.height - starty
-        return reflectLeftoverFromWall(reverseStartY, leftover - numberOfHeightCrossings * ballSizeSpeed, false)
+        return reflectLeftoverFromWall(reverseStartY, leftover, false)
     }
     if (numberOfHeightCrossings % 2 === 1 && speedy > 0) {
-        console.log('neli')
         const reverseStartY = playingfield.height - starty
-        return reflectLeftoverFromWall(reverseStartY, leftover - numberOfHeightCrossings * ballSizeSpeed, true)
+        return reflectLeftoverFromWall(reverseStartY, leftover, true)
     }
 }
 
 export const AILvl2 = () => {
-    const speed = smoothspeed(ball.dy, ball.dx, computerPaddle.speed)
+    const speed = computerPaddle.speed
     const balldirectionX = ball.dx > 0 ? 'incoming' : 'outgoing'
     if (balldirectionX === 'outgoing' && calculatedAI === true) {
         calculatedAI = false
@@ -108,8 +119,8 @@ export const AILvl2 = () => {
     }
 
     let ballPaddleRelation = calcspotAI > (computerPaddle.y + computerPaddle.height / 2) ? 'down' : 'up'
-    if (calcspotAI < (computerPaddle.y + computerPaddle.height / 2) + 5 &&
-        calcspotAI > (computerPaddle.y + computerPaddle.height / 2) - 5) {
+    if (calcspotAI < (computerPaddle.y + computerPaddle.height / 2) + computerPaddle.speed &&
+        calcspotAI > (computerPaddle.y + computerPaddle.height / 2) - computerPaddle.speed) {
         ballPaddleRelation = 'towards'
     }
     const info = balldirectionX + ballPaddleRelation
@@ -130,7 +141,7 @@ export const AILvl2 = () => {
     }
 }
 export const Player1AI = () => {
-    const speed = smoothspeed(ball.dy, ball.dx, playerPaddle.speed)
+    const speed = playerPaddle.speed
     const balldirectionX = ball.dx > 0 ? 'outgoing' : 'incoming'
     if (balldirectionX === 'outgoing' && player1calculatedAI === true) {
         player1calculatedAI = false
