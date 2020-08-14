@@ -1,5 +1,12 @@
 .App {
   text-align: center;
+  max-height: 10vh;
+}
+@media (max-height:450px){
+  .App{
+    font-size:x-small;
+    margin-bottom: 12px;
+  }
 }
 
 

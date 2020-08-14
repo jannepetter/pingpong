@@ -13,24 +13,22 @@
     outline: none;
 }
 .touchnappi{
-    width: 12%;
-    height: 18%;
-    border-radius: 50%;
+    width: 8%;
+    height: 15%;
+    border-radius: 10%;
     position: absolute; 
     display: none;
     outline: none;
     opacity: 0.3;
     background:white;
-
-
 }
 .ylos{
     top: 35%;
-    left: 3%;  
+    left: 4%; 
 }
 .alas{
-    top: 55%;
-    left: 3%;   
+    top: 52%;
+    left: 4%;      
 }
 
 @media  (max-height: 768px) and (max-width: 1024px) and (orientation: landscape) {
@@ -46,10 +44,17 @@
     }
     }
 @media  (max-height: 420px) and (orientation: landscape) {
+    /* small screen button layout and size adj. */
     .ylos{
+    top: 25%;
     left: 6%;
     }
     .alas{
+    top:55%;
     left: 6%;
+    }
+    .touchnappi{
+    width: 13%;
+    height: 30%; 
     }
     }

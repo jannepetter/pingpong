@@ -18,7 +18,7 @@ const Board = (props) => {
     const setUpdate = props.setUpdate
     const setStart = props.setStart
     const setRun = props.setRun
-    const gamePointLimit = 5
+    const gamePointLimit = 10
 
     const ctx = canvas.getContext('2d')
     canvas.width = playingfield.width
@@ -186,19 +186,28 @@ const Board = (props) => {
         setComputerPoints(0)
         setPlayerPoints(0)
     }
-    const touchKeyDownHandle = (direction) => {
+    const touchKeyDownHandle = (e, direction) => {
+        if (e.cancelable) {
+            e.preventDefault(); /* scroll prevent while pressing the button */
+        }
         playerPaddle.dy = playerPaddle.speed * direction
     }
-    const touchKeyUpHandle = () => {
+    const touchKeyUpHandle = (e) => {
+        if (e.cancelable) {
+            e.preventDefault(); /* scroll prevent while pressing the button */
+        }
         playerPaddle.dy = 0
 
     }
+
     const goUpTouchKey = document.getElementById('ylosnappi')
     const goDownTouchKey = document.getElementById('alasnappi')
-    goUpTouchKey.addEventListener('touchstart', () => touchKeyDownHandle(-1), { passive: true })
-    goUpTouchKey.addEventListener('touchend', touchKeyUpHandle)
-    goDownTouchKey.addEventListener('touchstart', () => touchKeyDownHandle(1), { passive: true })
-    goDownTouchKey.addEventListener('touchend', touchKeyUpHandle)
+
+
+    goUpTouchKey.addEventListener('touchstart', (e) => touchKeyDownHandle(e, -1), { passive: false })
+    goUpTouchKey.addEventListener('touchend', (e) => touchKeyUpHandle(e))
+    goDownTouchKey.addEventListener('touchstart', (e) => touchKeyDownHandle(e, 1), { passive: false })
+    goDownTouchKey.addEventListener('touchend', (e) => touchKeyUpHandle(e))
 
 
 
