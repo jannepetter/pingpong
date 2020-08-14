@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/pingpong/static/css/main.b74eb59d.chunk.css",
-    "main.js": "/pingpong/static/js/main.103eda8c.chunk.js",
-    "main.js.map": "/pingpong/static/js/main.103eda8c.chunk.js.map",
+    "main.js": "/pingpong/static/js/main.ec460fb4.chunk.js",
+    "main.js.map": "/pingpong/static/js/main.ec460fb4.chunk.js.map",
     "runtime-main.js": "/pingpong/static/js/runtime-main.4dcdc3c0.js",
     "runtime-main.js.map": "/pingpong/static/js/runtime-main.4dcdc3c0.js.map",
     "static/js/2.96b9b089.chunk.js": "/pingpong/static/js/2.96b9b089.chunk.js",
     "static/js/2.96b9b089.chunk.js.map": "/pingpong/static/js/2.96b9b089.chunk.js.map",
     "index.html": "/pingpong/index.html",
-    "precache-manifest.c7ea93886fed94baab52466c8dc616c3.js": "/pingpong/precache-manifest.c7ea93886fed94baab52466c8dc616c3.js",
+    "precache-manifest.f5d42d62f2906127f76cef841e39252c.js": "/pingpong/precache-manifest.f5d42d62f2906127f76cef841e39252c.js",
     "service-worker.js": "/pingpong/service-worker.js",
     "static/css/main.b74eb59d.chunk.css.map": "/pingpong/static/css/main.b74eb59d.chunk.css.map",
     "static/js/2.96b9b089.chunk.js.LICENSE.txt": "/pingpong/static/js/2.96b9b089.chunk.js.LICENSE.txt"
@@ -17,6 +17,6 @@
     "static/js/runtime-main.4dcdc3c0.js",
     "static/js/2.96b9b089.chunk.js",
     "static/css/main.b74eb59d.chunk.css",
-    "static/js/main.103eda8c.chunk.js"
+    "static/js/main.ec460fb4.chunk.js"
   ]
 }
