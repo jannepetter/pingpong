@@ -2,3 +2,6 @@
     background: var(--color1);
     color: white;
 }
+.scoreButton{
+    margin-left: 4vw;
+}

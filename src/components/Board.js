@@ -6,8 +6,11 @@ import {
     clearCanvas, ballHitsPaddle, startingPositions, drawInstructions, drawEndText
 } from '../utils/Functions'
 import '../css/Board.css'
+import { postScores } from '../services/scoreService'
 
 const Board = (props) => {
+
+
     const rafID = useRef()
     const pauseButtonInfo = props.run ? 'pause' : 'continue'
     const canvas = document.getElementById('kanvaasi')
@@ -18,7 +21,16 @@ const Board = (props) => {
     const setUpdate = props.setUpdate
     const setStart = props.setStart
     const setRun = props.setRun
+    const setScores = props.setScores
     const gamePointLimit = 10
+    let baseScore
+    if (difficulty === 'easy') {
+        baseScore = 100
+    } else if (difficulty === 'normal') {
+        baseScore = 200
+    } else {
+        baseScore = 600
+    }
 
     const ctx = canvas.getContext('2d')
     canvas.width = playingfield.width
@@ -68,7 +80,34 @@ const Board = (props) => {
         return 'noscore'
     }, [computerPoints, playerPoints, pausedView])
 
+    const scoresorter = (a, b) => {
+        return parseInt(b.score) - parseInt(a.score)
+    }
 
+    const calculatePoints = useCallback(async (scores, base) => {
+        if (scores && playerPoints > computerPoints) {
+            console.log(scores, scores.length, 'tarkistus')
+            const minscore = parseInt(scores[scores.length - 1]?.score)
+            const playerScore = (1 + playerPoints - computerPoints) * base
+            if (scores.length < 10 || (playerScore > minscore)) {
+                const playerName = window.prompt('New highscore')
+                const playserNameAndScore = { playername: playerName, score: playerScore.toString() }
+                const newscores = []
+                newscores.push(playserNameAndScore)
+                scores.forEach(element => {
+                    delete element._id
+                    newscores.push(element)
+                });
+                const body = {
+                    gamename: 'pong',
+                    scores: newscores.sort((a, b) => scoresorter(a, b)).slice(0, 10)
+                }
+                const response = await postScores(body)
+                const responseScores = response.scores ? response.scores : []
+                setScores(responseScores)
+            }
+        }
+    }, [computerPoints, playerPoints, setScores])
     const endGame = useCallback((whoScored) => {
         const delayUpdate = () => {
             setTimeout(() => {
@@ -88,6 +127,7 @@ const Board = (props) => {
             case 'computer':
                 if (computerPoints + 1 >= gamePointLimit) {
                     drawEndGame()
+                    calculatePoints(props.scores, baseScore)
                     break;
                 }
                 delayUpdate()
@@ -95,6 +135,7 @@ const Board = (props) => {
             case 'player':
                 if (playerPoints + 1 >= gamePointLimit) {
                     drawEndGame()
+                    calculatePoints(props.scores, baseScore)
                     break;
                 }
                 delayUpdate()
@@ -102,7 +143,7 @@ const Board = (props) => {
             default:
                 break;
         }
-    }, [ctx, canvas, playerPoints, computerPoints, setUpdate, setStart, setRun, setDifficulty])
+    }, [ctx, canvas, playerPoints, computerPoints, setUpdate, setStart, setRun, setDifficulty, baseScore, calculatePoints, props.scores])
 
 
     const update = useCallback(() => {
@@ -134,7 +175,9 @@ const Board = (props) => {
         }
     }, [computerPoints, playerPoints, props.run, props.start, props.update, update, props.difficulty])
 
-
+    if (props.show) {
+        return null
+    }
 
     const keyDown = (e) => {
         if (e.key === 'ArrowUp') {

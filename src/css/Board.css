@@ -1,13 +1,19 @@
 .infobar{
     background: var(--color1);
     width: 100%;
-    min-height: 6vh;
+    min-height: 4vh;
     color: white;
     display: inline-block;
+    padding-top: 1vh;
+}
+.gameboard{
+    position: relative;
+    z-index: 0;
 }
 
 .infoitem{
-    margin-left: 20px;
+    /* margin-left: 20px; */
+    margin-right: 40px;
 }
 .basicButton{
     outline: none;
